@@ -1,4 +1,4 @@
-![]([[https://github.com/user-attachments/assets/f0190bb1-81ef-4b4e-bb40-240fdbbdeaf9](https://github.com/JiaLing-Tan/Rally-Prelim/blob/latest_branch/lib/assets/RALLY%20(1).png)])
+![](https://github.com/JiaLing-Tan/Rally-Prelim/blob/latest_branch/lib/assets/RALLY%20(1).png)
 
 ### Rally
 An all-in-one applicant tracking system that integrates the functionalities of Google Workspace, Google Cloud, and Notion.
