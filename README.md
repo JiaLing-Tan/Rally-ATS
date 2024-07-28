@@ -1,4 +1,4 @@
-![]([https://pandao.github.io/editor.md/examples/images/4.jpg](https://github.com/user-attachments/assets/f0190bb1-81ef-4b4e-bb40-240fdbbdeaf9))
+![]([https://github.com/user-attachments/assets/f0190bb1-81ef-4b4e-bb40-240fdbbdeaf9])
 
 ### Rally
 An all-in-one applicant tracking system that integrates the functionalities of Google Workspace, Google Cloud, and Notion.
