@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -27,6 +29,8 @@ class NotionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Uri notionLinkUri = Uri.parse(notionLink);
+
+    print('notionUrlOptional:-$notionUrlOptional-');
 
     return SingleChildScrollView(
         child: SizedBox(
@@ -135,7 +139,7 @@ class NotionPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  notionUrlOptional == " "
+                  notionUrlOptional == null
                       ? const Text("")
                       : TextButton(
                           onPressed: () async {
@@ -157,21 +161,51 @@ class NotionPage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: Notion.notionCache[childPageId]!['content']!
                               .map((item) {
-                            if (item.startsWith('http') ||
-                                item.startsWith('https')) {
+                            if (item['type'] == 'image') {
                               // Check if the item is a URL
                               return Padding(
-                                  padding: const EdgeInsets.symmetric( horizontal: 20),
-                                child: Image.network(
-                                    item),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20.0, vertical: 10),
+                                child: Image.network(item['content']),
                               ); // Return Image widget if it's a URL
-                            } else {
+                            } else if (item['type'] == 'bookmark') {
+                              // Check if the item is a URL
                               return Padding(
                                 padding: const EdgeInsets.symmetric(
-                                    vertical: 2.5, horizontal: 20),
+                                    horizontal: 20.0, vertical: 10),
+                                child: TextButton(
+                                  child: Text(item['content']),
+                                  onPressed: () async {
+                                    if (await canLaunchUrl(
+                                        Uri.parse(item['content']))) {
+                                      await launchUrl(
+                                          Uri.parse(item['content']));
+                                    } else {
+                                      throw 'Could not launch ${item['content']}';
+                                    }
+                                  },
+                                ),
+                              ); // Return Image widget if it's a URL
+                            } else if (item['type'] == 'text'){
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 10.0, horizontal: 20),
                                 child: Text(
-                                  item ?? "",
+                                  item['content'] ?? "",
                                   textAlign: TextAlign.justify,
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              );
+                            }
+                            else{
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 10.0, horizontal: 20),
+                                child: Text(
+                                  item['content'],
                                   style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 15,
@@ -203,20 +237,37 @@ class NotionPage extends StatelessWidget {
                               return Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: contents.map((item) {
-                                  if (item.startsWith('http') ||
-                                      item.startsWith('https')) {
+                                  if (item['type'].toString() == 'image') {
                                     // Check if the item is a URL
                                     return Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
-                                      child: Image.network(
-                                          item),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20.0, vertical: 10),
+                                      child: Image.network(item['content']),
+                                    ); // Return Image widget if it's a URL
+                                  } else if (item['type'] == 'bookmark') {
+                                    // Check if the item is a URL
+                                    return Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20.0, vertical: 10),
+                                      child: TextButton(
+                                        child: Text(item['content']),
+                                        onPressed: () async {
+                                          if (await canLaunchUrl(
+                                              Uri.parse(item['content']))) {
+                                            await launchUrl(
+                                                Uri.parse(item['content']));
+                                          } else {
+                                            throw 'Could not launch ${item['content']}';
+                                          }
+                                        },
+                                      ),
                                     ); // Return Image widget if it's a URL
                                   } else {
                                     return Padding(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 10.0, horizontal: 20),
                                       child: Text(
-                                        item ?? "",
+                                        item['content'] ?? "",
                                         textAlign: TextAlign.justify,
                                         style: const TextStyle(
                                           color: Colors.black,

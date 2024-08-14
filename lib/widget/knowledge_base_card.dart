@@ -30,7 +30,7 @@ class KnowledgeBaseCard extends StatelessWidget {
                     Navigator.of(context).pop(); // Close dialog when tapped outside
                   },
                   child:
-                  NotionPage(cat: cat,title: title, childPageId: child_page_id,description: description,notion_cover: notion_cover, notionIcon:notionIcon, notionLink:notionLink, notionUrlOptional:notionUrlOptional??" ")
+                  NotionPage(cat: cat,title: title, childPageId: child_page_id,description: description,notion_cover: notion_cover, notionIcon:notionIcon, notionLink:notionLink, notionUrlOptional:notionUrlOptional)
                 ),
               );
             },
