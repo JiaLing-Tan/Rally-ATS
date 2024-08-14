@@ -304,7 +304,7 @@ class _CreateKnowledgeCardState extends State<CreateKnowledgeCard> {
                         child: const Text('Send to Notion!'),
                         onPressed: () {
                           String title = _titleController.text;
-                          String link = _linkController.text;
+                          String? optionalUrl = _linkController.text;
                           String content = _contentController.text;
                           String description = _descriptionController.text;
                           String? tag = _tagSelectedOption;
@@ -334,8 +334,8 @@ class _CreateKnowledgeCardState extends State<CreateKnowledgeCard> {
                             );
                           } else {
                             print("Trying upload to notion");
-                            if (link == '') {
-                              link = ' ';
+                            if (optionalUrl == '') {
+                              optionalUrl = null;
                             }
                             showDialog(
                               barrierDismissible: false,
@@ -344,7 +344,7 @@ class _CreateKnowledgeCardState extends State<CreateKnowledgeCard> {
                                 return FutureBuilder(
                                   future: Notion.createNewPost(
                                     "📖",
-                                    link,
+                                    optionalUrl,
                                     title,
                                     tag,
                                     description,
