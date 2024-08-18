@@ -47,6 +47,8 @@ Map<String, int> dayMap = {
 
 List<String> reqStatus = ["In Progress", "Rejected", "Approved"];
 
+Map statsMap = {"Total Employee":20, "Open Position": 4, "Job Application": 59, "Request":2};
+
 
 String url = dotenv.env['url']!;
 String token = dotenv.env['token']!;

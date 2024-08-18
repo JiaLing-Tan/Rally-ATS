@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:rally/resources/theme.dart';
+import 'package:rally/resources/utils.dart';
 import 'package:rally/widget/pomodoro.dart';
 import 'package:rally/widget/quote.dart';
 import 'package:rally/widget/request_dashboard.dart';
@@ -38,12 +39,7 @@ class _DashboardState extends State<Dashboard> with AutomaticKeepAliveClientMixi
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Stats(statsTitle: "Total Employee"),
-                  Stats(statsTitle: "New Employee"),
-                  Stats(statsTitle: "Open Position"),
-                  Stats(statsTitle: "Job Applicants")
-                ],
+                children: statsMap.keys.map((e) => Stats(statsTitle: e)).toList()
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,

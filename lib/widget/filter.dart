@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rally/model/candidate.dart';
-import 'package:rally/model/provider/roleProvider.dart';
-import 'package:rally/model/provider/ratingProvider.dart';
+import 'package:rally/model/provider/role_provider.dart';
+import 'package:rally/model/provider/rating_provider.dart';
 import 'package:rally/resources/theme.dart';
 import 'package:rally/resources/utils.dart';
 import 'package:riverpod/riverpod.dart';
 
-import '../model/provider/filterProvider.dart';
+import '../model/provider/filter_provider.dart';
 
 class Filter extends StatefulWidget {
   final BuildContext context;

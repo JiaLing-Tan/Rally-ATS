@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:rally/resources/theme.dart';
+import 'package:rally/resources/utils.dart';
 
 class Stats extends StatefulWidget {
   final String statsTitle;
@@ -36,7 +37,7 @@ class _StatsState extends State<Stats> {
                 ],
               ),
               SizedBox(height: 15,),
-              Text("20")
+              Text(statsMap[widget.statsTitle].toString(), style: TextStyle(fontSize: 15),)
             ],
           ),
         ),

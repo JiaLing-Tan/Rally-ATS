@@ -23,30 +23,10 @@ class RequestDataTable extends StatefulWidget {
 class _RequestDataTableState extends State<RequestDataTable>
     with AutomaticKeepAliveClientMixin {
   @override
-  bool _isLoading = false;
   final TextEditingController _searchController = TextEditingController();
   String _searchTerm = "";
 
-  Stream<List<Request>> getRequest() async* {
-    print("getting data");
-    final response =
-        await http.get(Uri.parse("$url?token=$token&funcName=getRequest"));
-    if (response.statusCode == 200) {
-      final List<dynamic> jsonData = jsonDecode(response.body);
-      List<Request> requests = jsonData.map((request) {
-        return Request.fromJson(request);
-      }).toList();
-      yield requests;
-    } else {
-      throw Exception('Failed to fetch requests');
-    }
 
-    if (_isLoading) {
-      setState(() {
-        _isLoading = false;
-      });
-    }
-  }
 
   Object filterWidget() {
     return showDialog(
@@ -107,9 +87,7 @@ class _RequestDataTableState extends State<RequestDataTable>
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  setState(() {
-                                    _isLoading = true;
-                                  });
+                                    provideRequest.setLoading(true);
                                 },
                                 child: Container(
                                   decoration: ThemeRally.widgetDeco(),
@@ -147,12 +125,12 @@ class _RequestDataTableState extends State<RequestDataTable>
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: StreamBuilder(
-                  stream: getRequest(),
+                  stream: provideRequest.getRequest(),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
                       return Text('Error: ${snapshot.error}');
                     }
-                    if (!snapshot.hasData || _isLoading) {
+                    if (!snapshot.hasData || provideRequest.isLoading) {
                       return Center(
                           child: CircularProgressIndicator(
                         color: ThemeRally.newBlack,
