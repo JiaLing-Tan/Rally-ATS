@@ -29,7 +29,7 @@ class _OfferLetterState extends State<OfferLetter> {
     super.initState();
     _startTimeController.text = "9:30 AM";
     _endTimeController.text = "6:00 PM";
-    _startDateController.text = "1 Mar 2024";
+    _startDateController.text = "1 Sept 2024";
   }
 
   Future<http.Response> offerPosition(String id) async {
@@ -37,12 +37,13 @@ class _OfferLetterState extends State<OfferLetter> {
       _isLoading = true;
     });
     showSnackBar("Sending Offer letter...", context);
-    String? urlGet = "$url?token=$token&funcName=offerPosition&id=$id";
+    String? urlGet = "$url?token=$token&funcName=offerPosition&id=$id&startDate=${_startTimeController.text}&salary=${_salaryController.text}.";
     var response = await http.get(Uri.parse(urlGet));
     showSnackBar("Offer letter sent out successfully.", context);
     setState(() {
       _isLoading = false;
     });
+
 
     return response;
   }
@@ -63,7 +64,7 @@ class _OfferLetterState extends State<OfferLetter> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Supervisor ID"),
+                  Text("Job Description"),
                   SizedBox(
                     height: 5,
                   ),

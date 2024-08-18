@@ -8,8 +8,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:rally/model/candidate.dart';
 import 'package:rally/model/feedback.dart';
-import 'package:rally/model/provider/filterProvider.dart';
-import 'package:rally/model/provider/roleProvider.dart';
+import 'package:rally/model/provider/filter_provider.dart';
+import 'package:rally/model/provider/role_provider.dart';
 import 'package:rally/resources/theme.dart';
 import 'package:http/http.dart' as http;
 import 'package:rally/widget/candidate_details.dart';
@@ -29,10 +29,10 @@ class _CandidatesState extends State<Candidates>
     with AutomaticKeepAliveClientMixin {
   Candidate showCandidate = Candidate.empty();
   bool isLoading = false;
-  List<String> statusList = ["In progress"];
   final TextEditingController _searchController = TextEditingController();
   String _searchTerm = "";
   List<InterviewFeedback> interviewFeedback = [];
+
 
   Stream<List<Candidate>> getCandidates() async* {
     print("getting data");

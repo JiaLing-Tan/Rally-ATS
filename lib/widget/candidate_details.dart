@@ -8,11 +8,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:rally/model/candidate.dart';
-import 'package:rally/model/provider/roleProvider.dart';
+import 'package:rally/model/provider/role_provider.dart';
 import 'package:rally/resources/email_launcher.dart';
 import 'package:rally/resources/theme.dart';
 import 'package:rally/resources/utils.dart';
 import 'package:rally/widget/offer_letter.dart';
+import 'package:rally/widget/status_indicator.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 import '../model/feedback.dart';
@@ -232,6 +233,31 @@ class _CandidateDetailsState extends State<CandidateDetails> {
                       ),
                     ],
                   ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.star_rounded,
+                        color: ThemeRally.black,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        "Application Status",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            color: ThemeRally.black),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  StatusIndicator(text: candidate.status, isBig: true),
                   SizedBox(
                     height: 20,
                   ),
